@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UV-Compatible" content="IE-edge">
+        <meta name="viewport" content="width=device-wight,initial-scale=1.0">
+        <title>Missionaries and Cannibals Backtracking</title>
+        <link rel="stylesheet" href="styles.css"
+    </head>
+
+<body>
+    <header class="header">
+        <a href="#" class="logo" >Missionaries and Cannibals
+            Backtracking</a>
+
+        <nav class="navbar">
+            <a href="#" style="--i:1;">Home</a>
+            <a href="#" style="--i:2;"></a>
+            <a href="#" style="--i:3;"></a>
+            <a href="#" style="--i:4;"></a>
+            <a href="#" style="--i:5;"></a>
+        </nav>
+    </header>
+
+    <section class="home">
+        <div class="home-content">
+            <h3>Missionaries and Cannibals</h3>
+            <h1>Backtracking</h1>
+            <h3>BY <span class="multiple-text"></span></h3>
+            <h5>Bangkok University </span></h5>
+            <h4><span>Dr.Chiabwoot Ratanavilisagul</span></h4>
+            <p>Role : กฏการเล่น</p>
+            <p>มีนักบวช 3 คน และ คนกินคน 3 คนที่ต้องข้ามแม่น้ำไปยังฝั่งตรงข้าม</p>
+            <p>ใช้เรือที่สามารถรับได้ไม่เกิน 2 คน ในแต่ละครั้งที่ข้าม</p>
+            <p>เรือจะต้องมีอย่างน้อย 1 คนเพื่อขับขี่เรือไปยังฝั่งตรงข้าม</p>
+            <p>ในจุดใดก็ตามของเกม จำนวนคนกินคนที่ฝั่งใดฝั่งหนึ่งต้องไม่เกินจำนวนนักบวชที่ฝั่งนั้น หากมีนักบวชอยู่ที่นั่น (นั่นคือ ถ้ามีนักบวช คนกินคนจะต้องไม่มากกว่าจำนวนนักบวชในที่นั้น)</p>
+            <p>ย้ายทั้งหมด 6 คนจากฝั่งหนึ่งไปยังฝั่งตรงข้ามโดยปฏิบัติตามกฎที่กล่าวมาข้างต้น</p>
+        </div>
+        <div class="home-img">
+            <img src="home.png" alt="">
+        </div>
+    </section>
+
+    <section class="Introduction">
+        <div class="introduction">
+            <div class="text">
+              <h1>Introduction</h1>
+              <p>Missionaries and Cannibals การวางแผนและประยุกต์ใช้แนวคิดการค้นหาเชิงกลยุทธ์ เป้าหมายของปัญหานี้คือการข้ามแม่น้ำโดยมีนักบวชและคนกินคนอย่างละสามคน โดยที่จะต้องไม่เกิดสถานการณ์ที่คนกินคนมีจำนวนมากกว่านักบวชในฝั่งใดฝั่งหนึ่ง เพื่อป้องกันไม่ให้เกิดการโจมตีนักบวช การค้นหาและวางแผนที่มีประสิทธิภาพในการข้ามแม่น้ำจึงเป็นสิ่งจำเป็น</p>
+            </div>
+            <img src="introductpic.PNG" alt="Descriptive Alt Text" class="image">
+            <div class="description">
+            </div>
+          </div>          
+    </section>
+
+    <section class="ExplainAlgo">
+        <div class="ExplainAlgo">
+            <div class="text">
+              <h1>Explain Algorithm</h1>
+              <p>Backtracking ใช้ในการแก้ปัญหาโดยการลองทุกทางเพื่อหาทางที่เป็นไปได้ทั้งหมด โดยจะทดสอบและตรวจสอบสถานะของปัญหาเรื่อยๆ จนกว่าจะพบวิธีการแก้ปัญหาหรือทางออกที่เป็นไปได้ทั้งหมด</p>
+              <p>ขั้นตอนที่ 1 กำหนดค่าและตั้งค่าเริ่มต้นกำหนดค่าและตั้งค่าเริ่มต้นให้กับตัวแปรต่างๆ เช่น จำนวนนักบวชและคนกินคนที่อยู่ทางซ้าย และเรือที่อยู่ทางซ้ายด้วย</p>
+              <p>ขั้นตอนที่ 2 แสดงภาพเริ่มต้นใช้ภาพพื้นหลังและรูปภาพของนักบวช คนกินคน และเรือ เพื่อแสดงสถานะเริ่มต้นของเกม</p>
+              <p>ขั้นตอนที่ 3 ตรวจสอบการคลิกตรวจสอบว่าผู้เล่นได้คลิกที่ปุ่ม Go เพื่อย้ายเรือหรือปุ่ม Reset เพื่อเริ่มเกมใหม่หรือไม่</p>
+              <p>ขั้นตอนที่ 4 ปรับเปลี่ยนสถานะหากมีการคลิกที่สิ่งของใดๆ ที่สามารถเปลี่ยนแปลงสถานะของเกม เช่น โหลดคนลงจากเรือ จะมีการปรับเปลี่ยนจำนวนนักบวชและคนกินคนที่อยู่ทางซ้ายและขวา และตรวจสอบสถานะของเกมว่าชนะหรือไม่</p>
+              <p>ขั้นตอนที่ 5 แสดงผลทุกครั้งที่มีการเปลี่ยนแปลงสถานะของเกม โปรแกรมจะแสดงผลลัพธ์บนหน้าจอ แจ้งให้ผู้เล่นทราบว่าเกมจบลงหรือชนะ</p>
+            </div>
+            <div class="description">
+            </div>
+          </div>          
+    </section>
+
+    <section class="CaseStudy">
+        <div class="CaseStudy">
+            <div class="text">
+              <h2>❁——————————————————————————————❁</h2>
+              <h1>Case Study Example 1</h1>
+              <div class="CSSgal">
+                <!-- ไม่ต้องห่อ targets ไว้ในแท็กผู้ปกครอง -->
+                <s id="s1"></s> 
+                <s id="s2"></s>
+                <s id="s3"></s>
+                <s id="s4"></s>
+                <s id="s5"></s>
+                <s id="s6"></s>
+                <s id="s7"></s>
+                <s id="s8"></s>
+                <s id="s9"></s>
+              
+                <div class="slider">
+                  <div style="background-image: url('CaseStudy/Pic1.png');">
+                    <h2>ตัวอย่างที่ 1 <b>CSS</b> เป็นเส้นที่สถานะที่ชนะได้</h2>
+                    <p></p>
+                  </div>
+                  <div style="background-image: url('CaseStudy/Pic2.png');">
+                  </div>
+                  <div style="background-image: url('CaseStudy/Pic3.png');">
+                  </div>
+                  <div style="background-image: url('CaseStudy/Pic4.png')">
+                  </div>
+                  <div style="background-image: url('CaseStudy/Pic5.png');">
+                  </div>
+                  <div style="background-image: url('CaseStudy/Pic6.PNG');">
+                  </div>
+                  <div style="background-image: url('CaseStudy/Pic7.PNG');">
+                  </div>
+                  <div style="background-image: url('CaseStudy/Pic8.PNG');">
+                  </div>  
+                  <div style="background-image: url('CaseStudy/Pic9.PNG');">
+                  </div>
+                </div>
+            
+                <div class="bullets">
+                  <a data-target="0">1</a>
+                  <a data-target="1">2</a>
+                  <a data-target="2">3</a>
+                  <a data-target="3">4</a>
+                  <a data-target="4">5</a>
+                  <a data-target="5">6</a>
+                  <a data-target="6">7</a>
+                  <a data-target="7">8</a>
+                  <a data-target="8">9</a>
+                </div>
+              </div>
+              <div class="detial_s">
+            </div>
+            </div>
+            <div class="description">
+            </div>
+          </div>          
+    </section>
+
+    <section class="DetailCaseStudy">
+      <div class="DetailCaseStudy">
+          <div class="text">
+            <p>จากรูปภาพที่ 1 : มี 3 นักบวชและ 3 คนกินคนที่ฝั่งซ้ายของแม่น้ำ ต้องการข้ามไปยังฝั่งขวาโดยใช้เรือที่รับได้สูงสุด 2 คน</p>
+            <p>จากรูปภาพที่ 2 : ครั้งที่ 1: ส่ง 1 นักบวชและ 1 คนกินคนจากฝั่งซ้ายไปฝั่งขวาโดยที่ให้คนกินคนลงก่อน </p>
+            <p>จากรูปภาพที่ 3 : ครั้งที่ 2: พายเรือกลับไปที่ฝั่งซ้ายโดยใช้นักบวชและรับคนกินคน 1 คนขึ้นเรือ</p>
+            <p>จากรูปภาพที่ 4 : ครั้งที่ 3: พายเรือไปขวาและย้ายนักบวช 1 คนขึ้นฝั่ง</p>
+            <p>จากรูปภาพที่ 5 : ครั้งที่ 4: พายเรือกลับฝั่งซ้ายด้วยคนกินคน และรับนักบวชขึ้นเรือ 1 คน </p>
+            <p>จากรูปภาพที่ 6 : ครั้งที่ 5: พานักบวชขึ้นฝั่งขวาจะคงคนกินคนไว้และพายเรือกลับไปฝั่งซ้ายอีกครั้ง </p>
+            <p>จากรูปภาพที่ 7 : ครั้งที่ 6: พานักบวชขึ้นเรือจากฝั่งซ้ายและพายไปฝั่งขวาพานักบวชขึ้นจากเรือไปฝั่งขวา </p>
+            <p>จากรูปภาพที่ 8 : ครั้งที่ 7: กลับไปรับคนกินคนขึ้นเรือทั้งคู่และลงเรือพร้อมกัน </p>
+            <p>จากรูปภาพที่ 9 : สถานะนี้เเจ้งเตือนว่ายินดีด้วยคุณชนะ ซึ่งหมายความว่าเส้นทางนี้คือ 1 เส้นทางที่ดีที่สุดในการชนะ </p>
+          </div>
+          <div class="description">
+          </div>
+        </div>          
+  </section>
+
+  <section class="CaseStudy2">
+    <div class="CaseStudy2">
+        <div class="text">
+          <h1>Case Study Example 2</h1>
+          <h1>จากรูปที่เห็นจะเป็นสถานะที่แพ้ เนื่องจากเงื่อนไข นักบวชต้องมากกว่าคนกินคนหรือเท่ากันห้ามน้อยกว่าเด็ดขาด</h1>
+          <img src="CaseStudy/Pic10.png" alt="" width="800" height="400">
+          <h2>ทำให้เราต้องรีเซ็ตเพื่อหาทางแก้ปัญหาการชนะอีกครั้ง</h2>
+          <img src="CaseStudy/Pic11.png" alt="" width="800" height="400">
+          <h2>สถานะเลยเลือกใหม่ซึ่งนำคนกินคนขึ้นไปก่อน 2 คนและนำคนกินคน 1 คนลงฝั่งขวา</h2>
+          <img src="CaseStudy/Pic12.png" alt="รูปภาพ" width="800" height="400">
+          <h2>และรับนักบวชไป 1 คนนำไปลงที่ฝั่งขวาได้จำนวนที่เท่ากันของฝั่งขวาเลยเป็นไปตามเงื่อนไข</h2>
+          <img src="CaseStudy/Pic13.png" alt="" width="800" height="400">
+          <h2>และทำเหมือนเดิมคือการไปรับนักบวช 1 คนไปขึ้นฝั่งขวาทำให้จำนวนเยอะกว่าคนกินคนเป็นไปตามเงื่อนไข</h2>
+          <img src="CaseStudy/Pic14.png" alt="" width="800" height="400">
+          <h2>จึงทำให้เราชนะในสถานะนี้เเละนี้คือ 1 สถานะที่ชนะเป็นอีกทางเลือกการเดิน</h2>  
+</section>
+
+<section class="CodeExport">
+  <div class="CodeExport">
+      <div class="text">
+      </p>
+      <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+      <center><h2>Code</h2></center>
+      <center><h3>เกม Missionaries and Cannibals Backtracking</h3>
+        <table border="1" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="64" valign="top"><p align="center"><strong>บรรทัดที่</strong></p></td>
+          <td width="552" valign="top"><p align="center"><strong>โปรแกรม</strong><strong> </strong></p></td>
+        </tr>
+        <tr>
+          <td width="64" valign="top"><pre>      1<br>
+            2<br>
+            3<br>
+            4<br>
+            5<br>
+            6<br>
+            7<br>
+            8<br>
+            9<br>
+            10<br>
+            11<br>
+            12<br>
+            13<br>
+            14<br>
+            15<br>
+            16<br>
+            17<br>
+            18<br>
+            19<br>
+            20<br>
+            21<br>
+            22<br>
+            23<br>
+            24<br>
+            25<br>
+            26<br>
+            27<br>
+            28<br>
+            29<br>
+            30<br>
+            31<br>
+            32 <br>
+            33 <br>
+            34 <br>
+            35 <br>
+            36 <br>
+            37 <br>
+            38 <br>
+            39 <br>
+            40 <br>
+            41 <br>
+            42 <br>
+            43 <br>
+            44 <br>
+            45 <br>
+            46 <br>
+            47 <br>
+            48 <br>
+            49 <br>
+            50 <br>
+            51 <br>
+            52 <br>
+            53 <br>
+            54 <br>
+            55 <br>
+            56<br>
+            57<br>
+            58<br>
+            59<br>
+            60<br>
+            61<br>
+            62<br>
+            63<br>
+            64<br>
+            65<br>
+            66<br>
+            67<br>
+            68<br>
+            69<br>
+            70<br>
+            71<br>
+            72<br>
+            73<br>
+            74<br>
+            75<br>
+            76<br>
+            77<br>
+            78<br>
+            79<br>
+            80<br>
+            81<br>
+            82<br>
+            83<br>
+            84<br>
+            85<br>
+            86<br>
+            87<br>
+            88<br>
+            89<br>
+            90<br>
+            91<br>
+            92<br>
+            93<br>
+            94<br>
+            95<br>
+            96<br>
+            97<br>
+            98<br>
+            99<br>
+            100<br>
+            101<br>
+            102<br>
+            103<br>
+            104<br>
+            105<br>
+            106<br>
+            107<br>
+            108<br>
+            109<br>
+            110<br>
+            111<br>
+            112<br>
+            113<br>
+            114<br>
+            115<br>
+            116<br>
+            117<br>
+            118<br>
+            119<br>
+            120<br>
+            121<br>
+            122<br>
+            123<br>
+            124<br>
+            125<br>
+            126<br>
+            127<br>
+            128<br>
+            129<br>
+            130<br>
+            131<br>
+            132<br>
+            133<br>
+            134<br>
+            135<br>
+            136<br>
+            137<br>
+            138<br>
+            139<br>
+            140<br>
+            141<br>
+            142<br>
+            143<br>
+            144<br>
+            145<br>
+            146<br>
+            147<br>
+            148<br>
+            149<br>
+            150<br>
+            151<br>
+            152<br>
+            153<br>
+            154<br>
+            155<br>
+            156<br>
+            157<br>
+            158<br>
+            159<br>
+            160<br>
+            161<br>
+            162<br>
+            163<br>
+            164<br>
+            165<br>
+            166<br>
+            167<br>
+            168<br>
+            169<br>
+            170<br>
+            171<br>
+            172<br>
+            173<br>
+            174<br>
+            175<br>
+            176<br>
+            177<br>
+            178<br>
+            179<br>
+            180<br>
+            181<br>
+            182<br>
+            183<br>
+            184<br>
+            185<br>
+            186<br>
+            187<br>
+            188<br>
+            189</pre></td>
+          <td width="552" valign="top"><pre>import pygame<br>
+import sys<br>
+pygame.init()<br>
+SCREEN_WIDTH, SCREEN_HEIGHT = 800, 400<br>
+FPS = 30<br>
+WHITE = (255, 255, 255)<br>
+BLUE = (0, 0, 255)<br>
+RED = (255, 0, 0)<br>
+GREEN = (0, 255, 0)<br>
+BLACK = (0, 0, 0)<br>
+BUTTON_COLOR = (200, 200, 200)<br>
+BUTTON_HOVER_COLOR = (170, 170, 170)<br>
+CHARACTER_WIDTH = 30<br>
+CHARACTER_HEIGHT = 50<br>
+CHARACTER_SPACING = 10<br>
+missionary_image = pygame.image.load('missionary.png')<br>
+cannibal_image = pygame.image.load('cannibal.png')<br>
+boat_image = pygame.image.load('boat.png')<br>
+background_image = pygame.image.load('background_full.png')<br>
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))<br>
+pygame.display.set_caption("Missionaries and Cannibals Game")<br>
+clock = pygame.time.Clock()<br>
+missionaries_left = 3<br>
+cannibals_left = 3<br>
+missionaries_right = 0<br>
+cannibals_right = 0<br>
+boat_side = 'left'<br>
+boat_capacity = 2<br>
+boat_load = []<br>
+game_over = False<br>
+win = False<br>
+font = pygame.font.SysFont(None, 36)<br>
+go_button_rect = pygame.Rect(SCREEN_WIDTH // 2 - 30, 10, 60, 30)<br>
+reset_button_rect = pygame.Rect(SCREEN_WIDTH // 2 - 30, 50, 60, 30)<br>
+def draw_game_state():<br>
+    screen.fill(WHITE)<br>
+    screen.blit(background_image, (0, 0))<br>
+    draw_buttons()<br>
+    draw_characters_and_boat()<br>
+    if game_over:<br>
+        display_message("Game Over! Press Reset to restart", RED)<br>
+    if win:<br>
+        display_message("Congratulations! You Win!", GREEN)<br>
+        <br>
+def draw_buttons():<br>
+    draw_button(go_button_rect, "Go")<br>
+    draw_button(reset_button_rect, "Reset")<br>
+    <br>
+def draw_button(rect, text):<br>
+    mouse_x, mouse_y = pygame.mouse.get_pos()<br>
+    if rect.collidepoint((mouse_x, mouse_y)):<br>
+        pygame.draw.rect(screen, BUTTON_HOVER_COLOR, rect)<br>
+    else:<br>
+        pygame.draw.rect(screen, BUTTON_COLOR, rect)<br>
+    text_surf = font.render(text, True, BLACK)<br>
+    text_rect = text_surf.get_rect(center=rect.center)<br>
+    screen.blit(text_surf, text_rect)<br>
+    <br>
+def draw_characters_and_boat():<br>
+    draw_side(50, missionaries_left, missionary_image, 50)  # Draw missionaries on the left<br>
+    draw_side(50, cannibals_left, cannibal_image, 100 + CHARACTER_HEIGHT + CHARACTER_SPACING)  # Draw cannibals on the left<br>
+    draw_side(SCREEN_WIDTH - 50, missionaries_right, missionary_image, 50, right=True)<br>
+    draw_side(SCREEN_WIDTH - 50, cannibals_right, cannibal_image, 100 + CHARACTER_HEIGHT + CHARACTER_SPACING, right=True)  # Draw cannibals on the right<br>
+    draw_boat()<br>
+    <br>
+def draw_side(x_offset, characters_count, character_img, start_y, right=False):<br>
+    for i in range(characters_count):<br>
+        x_position = x_offset - i * (CHARACTER_WIDTH + CHARACTER_SPACING) if right else x_offset + i * (CHARACTER_WIDTH + CHARACTER_SPACING)<br>
+        screen.blit(character_img, (x_position, start_y))<br>
+        <br>
+def draw_boat():<br>
+    boat_x = 150 if boat_side == 'left' else SCREEN_WIDTH - 150 - boat_image.get_width()<br>
+    boat_y = 230<br>
+    screen.blit(boat_image, (boat_x, boat_y))<br>
+    for idx, (m, c) in enumerate(boat_load):<br>
+        img = missionary_image if m else cannibal_image<br>
+        screen.blit(img, (boat_x + 20 + idx * 30, boat_y - 30))<br>
+
+def display_message(message, color):<br>
+    text_surf = font.render(message, True, color)<br>
+    text_rect = text_surf.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))<br>
+    screen.blit(text_surf, text_rect)<br>
+
+def handle_click(pos):<br>
+    x, y = pos<br>
+    if go_button_rect.collidepoint(x, y):<br>
+        move_boat()<br>
+    elif reset_button_rect.collidepoint(x, y):<br>
+        reset_game()<br>
+    else:<br>
+        load_unload_people(x, y)<br>
+        <br>
+def load_unload_people(x, y):<br>
+    global missionaries_left, cannibals_left, missionaries_right, cannibals_right, boat_load, boat_side<br>
+    boat_x = 150 if boat_side == 'left' else SCREEN_WIDTH - 150 - boat_image.get_width()<br>
+    boat_y = 200<br>
+    if boat_x <= x <= boat_x + boat_image.get_width() and boat_y <= y <= boat_y + boat_image.get_height():<br>
+        unload_from_boat(x, y)<br>
+        return<br>
+    check_character_click(x, y, 50, 50, missionaries_left, missionary_image, 'left', (1, 0))<br>
+    check_character_click(x, y, 50, 100 + CHARACTER_HEIGHT + CHARACTER_SPACING, cannibals_left, cannibal_image, 'left', (0, 1))<br>
+    check_character_click(x, y, SCREEN_WIDTH - 50, 50, missionaries_right, missionary_image, 'right', (1, 0))<br>
+    check_character_click(x, y, SCREEN_WIDTH - 50, 100 + CHARACTER_HEIGHT + CHARACTER_SPACING, cannibals_right, cannibal_image, 'right', (0, 1))<br>
+    <br>
+def check_character_click(x, y, start_x, start_y, count, image, side, type):<br>
+    global boat_load, boat_side<br>
+    if len(boat_load) < 2:  # Make sure the boat does not exceed its capacity of 2<br>
+        if (side == 'left' and boat_side == 'left') or (side == 'right' and boat_side == 'right'):<br>
+            for i in range(count):<br>
+                img_x = start_x + i * (CHARACTER_WIDTH + CHARACTER_SPACING) if side == 'left' else start_x - i * (CHARACTER_WIDTH + CHARACTER_SPACING)<br>
+                if img_x <= x <= img_x + CHARACTER_WIDTH and start_y <= y <= start_y + CHARACTER_HEIGHT:<br>
+                    update_character_count(side, type)<br>
+                    break<br>
+def update_character_count(side, type):<br>
+  global missionaries_left, cannibals_left, missionaries_right, cannibals_right, boat_load<br>
+  if side == 'left':<br>
+    if type == (1, 0):<br>
+      missionaries_left -= 1<br>
+    else:<br>
+      cannibals_left -= 1<br>
+  else:<br>
+    if type == (1, 0):<br>
+        missionaries_right -= 1<br>
+    else:<br>
+        cannibals_right -= 1<br>
+  boat_load.append(type)<br>
+  <br> 
+def unload_from_boat(x, y):<br>
+  global missionaries_left, cannibals_left, missionaries_right, cannibals_right, boat_load, boat_side<br>
+  boat_x = 150 if boat_side == 'left' else SCREEN_WIDTH - 150 - boat_image.get_width()<br>
+  for idx, (m, c) in enumerate(boat_load):<br>
+      person_x = boat_x + 20 + idx * 30<br>
+      if person_x <= x <= person_x + CHARACTER_WIDTH and 200 <= y <= 200 + CHARACTER_HEIGHT:<br>
+        if boat_side == 'left':<br>
+            if m:<br>
+                missionaries_left += 1<br>
+        else:<br>
+                cannibals_left += 1<br>
+      else:<br>
+          if m:<br>
+              missionaries_right += 1<br>
+          else:<br>
+              cannibals_right += 1<br>
+      boat_load.pop(idx)<br>
+      break<br>
+      <br>     
+def reset_game():<br>
+    global missionaries_left, cannibals_left, missionaries_right, cannibals_right, boat_load, game_over, win, boat_side<br>
+    missionaries_left = 3<br>
+    cannibals_left = 3<br>
+    missionaries_right = 0<br>
+    cannibals_right = 0<br>
+    boat_side = 'left'<br>
+    boat_load = []<br>
+    game_over = False<br>
+    win = False<br>
+    <br>
+def check_game_state():<br>
+    global game_over, win<br>
+    if (missionaries_left < cannibals_left and missionaries_left > 0) or \
+       (missionaries_right < cannibals_right and missionaries_right > 0):<br>
+        game_over = True<br>
+    elif missionaries_right == 3 and cannibals_right == 3 and len(boat_load) == 0:<br>
+        win = True<br>
+        <br>
+def move_boat():<br>
+    global boat_side, boat_load, game_over, win<br>
+    if not boat_load:<br>
+        return  # Cannot move an empty boat<br>
+    boat_side = 'left' if boat_side == 'right' else 'right'<br>
+    check_game_state()<br>
+    if game_over:<br>
+        print("Lost: Invalid move leads to a losing condition.")<br>
+    if win:<br>
+        print("Congratulations! You Win!")<br>
+        <br>       
+running = True<br>
+while running:<br>
+    for event in pygame.event.get():<br>
+        if event.type == pygame.QUIT:<br>
+           running = False<br>
+        elif event.type == pygame.MOUSEBUTTONDOWN:<br>
+             handle_click(pygame.mouse.get_pos())<br>
+      <br>
+    check_game_state()<br>
+    draw_game_state()<br>
+    pygame.display.flip()<br>
+    clock.tick(FPS)<br>
+    <br>
+pygame.quit()<br>
+sys.exit()<br>
+</pre></td>
+        </tr>
+      </table>
+      <br>
+    </table>
+    <br>
+    <h3>ผลลัพธ์การทำงาน Missionaries and Cannibals Backtracking</h3>
+    <img src="/CaseStudy/Pic14.png" alt="" width="800" height="400">
+</section>
+
+<center>
+  <h1>Explain Code</h1> <br>
+  <center>
+  <table border="1" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="70" valign="top"><p align="center"><strong>บรรทัดที่</strong></p></td>
+      <td width="552" valign="top"><p align="center"><strong>คำอธิบายโปรแกรม</strong><strong> </strong></p></td>
+    </tr>
+    <tr>
+      <td width="70" valign="top"><pre>     1-34 <br>
+    35-43<br>
+    45-57<br>
+    59-64<br>
+    66-69<br>
+    71-77<br>
+    78-81<br>
+    83-90<br>
+    92-102<br>
+    104-112<br>
+    113-125<br>
+    127-144<br>
+    146-155<br>
+    157-163<br>
+    165-174<br>
+    175-181<br>
+    183-189<br>
+
+             </pre></td>
+      <td width="552" valign="top"><pre>
+        การจัดการรูปภาพ, ตัวแปรเกม, ตัวควบคุมเกม, และ UI 
+
+        ควบคุมการแสดงผลทั้งหมดบนหน้าจอสำหรับเกมนี้ โดยอัปเดตสถานะและตอบสนองต่อการเปลี่ยนแปลงในเกม เช่น การชนะหรือแพ้ และการวาดส่วนประกอบต่างๆ ในขณะเล่น
+
+        ทำหน้าที่วาดปุ่ม UI ของเกมและจัดการสถานะของปุ่มเมื่อมีการโต้ตอบกับเกมผ่านปุ่ม "Go" เพื่อเริ่มการเคลื่อนไหวของเรือ และปุ่ม "Reset" เพื่อเริ่มเกมใหม่
+
+        วาดตัวละครและเรือบนหน้าจอเกม โดยจัดการวาดทั้งนักบวชและคนกินคนที่อยู่ทั้งสองฝั่งของแม่น้ำ และเรือที่อยู่ตรงกลาง
+
+        วาดตัวละครบนหน้าจอตามจำนวนที่กำหนด ซึ่งตัวละครเหล่านี้สามารถวางอยู่ที่ฝั่งซ้ายหรือขวาของแม่น้ำได้ตามพารามิเตอร์
+
+        วาดเรือบนหน้าจอ โดยตำแหน่งจะถูกกำหนดโดยตัวแปร boat_side ซึ่งระบุว่าเรืออยู่ที่ฝั่งซ้ายหรือขวา
+
+         สร้างและแสดงข้อความบนหน้าจอเกม โดยใช้ข้อความ สำคัญ เช่น "Game Over!" หรือ "Congratulations! You Win!" ตรงกลางหน้าจอเพื่อแจ้งผู้เล่นเกี่ยวกับสถานะของเกม
+
+         ตรวจสอบการคลิกของเมาส์และเรียกใช้ฟังก์ชันที่เกี่ยวข้องตามตำแหน่งที่คลิก  "Go" และ "Reset" หรือการโหลดและย้ายตัวละครลงจากเรือ โดยเรียกใช้ move_boat(), reset_game(), หรือ load_unload_people(x, y)
+
+         ตรวจสอบว่าการคลิกอยู่บนเรือหรือไม่เพื่อย้ายตัวละคร หากไม่อยู่บนเรือ จะตรวจสอบว่าคลิกที่ตัวละครใดตัวละครหนึ่งเพื่อโหลดหรือย้าย
+
+         ตรวจสอบการคลิกที่ตัวละคร และอัปเดตจำนวนตัวละครที่โหลดขึ้นเรือหากการคลิกนั้นสอดคล้องกับตำแหน่งของตัวละครและเงื่อนไขการโหลด โดยตรวจสอบว่าการคลิกตรงกับตำแหน่งตัวละครและตัวละครอยู่ที่ฝั่งเดียวกับเรือหรือไม่
+
+         อัปเดตจำนวนตัวละครที่เหลืออยู่บนฝั่งหรือที่โหลดบนเรือตามการเคลื่อนไหวที่ผู้เล่นทำ ลดจำนวนนักบวชหรือคนกินคนบนฝั่งที่กำหนดเมื่อพวกเขาถูกโหลดขึ้นเรือและเพิ่มพวกเขาลงใน boat_load เพื่อระบุว่าพวกเขากำลังอยู่บนเรือ
+      
+         จัดการการย้ายตัวละครจากเรือกลับไปยังฝั่งที่เรืออยู่ เมื่อผู้เล่นคลิกบนตัวละครบนเรือ ตัวละครนั้นจะถูกลบออกจาก boat_load และจำนวนตัวละครที่เหมาะสมบนฝั่งจะเพิ่มขึ้นตามประเภทของตัวละคร (นักบวชหรือคนกินคน)
+
+         ตั้งค่าเกมใหม่ทั้งหมด รีเซ็ตทุกพารามิเตอร์กลับไปสู่สถานะเริ่มต้น รีเซ็ตตัวละครทั้งหมด สถานะของเรือ และสถานะการชนะหรือแพ้ของเกม
+
+         ตรวจสอบเงื่อนไขการชนะหรือแพ้ของเกม ถ้าจำนวนนักบวชน้อยกว่าคนกินคน และมีนักบวชอยู่ที่ฝั่งนั้น ตั้งค่า game_over เป็น True ถ้านักบวชและคนกินคนทั้งหมด 3 คนข้ามไปยังฝั่งตรงข้ามโดยไม่มีใครอยู่บนเรือ ตั้งค่า win เป็น True
+
+         การเคลื่อนย้ายเรือจากฝั่งหนึ่งไปยังอีกฝั่งหนึ่ง ตรวจสอบก่อนว่าเรือไม่ได้ว่างเปล่าถ้าว่างเปล่า จะไม่ดำเนินการขยับ ถ้ามีตัวละครบนเรือ สลับฝั่งเรือจากฝั่งปัจจุบันไปยังฝั่งตรงข้ามเรียก check_game_state() เพื่อตรวจสอบว่าการเคลื่อนย้ายนั้นนำไปสู่การชนะหรือแพ้
+
+         running เป็น True เพื่อเริ่มลูปเกม เริ่มลูปหลักของเกมที่จะทำงานต่อเนื่องจนกว่าผู้เล่นจะตัดสินใจปิดเกม และมีการจัดการกับอีเว้นท์ต่างๆ เช่น ดึงและตรวจสอบอีเวนต์ที่เกิดขึ้น อีเวนต์ปิดหน้าต่างเกม การคลิกเมาส์
+
+         เรียกฟังก์ชันเพื่อตรวจสอบและอัปเดตสถานะเกม (ชนะ, แพ้) เรียกฟังก์ชันเพื่อวาดหรือรีเฟรชสถานะปัจจุบันของเกมบนหน้าจอ อัปเดตหน้าจอแสดงผลทั้งหมด จำกัดอัตราเฟรมของเกมเพื่อให้เกมทำงานที่อัตราเฟรมต่อวินาทีที่กำหนด 
+
+
+        </pre></td>
+    </tr>
+    </table>
+
+    <section class="video-pre">
+      <div class="video-pre">
+          <div class="text">
+            <h2>❁——————————————————————————————❁</h2>
+            <h1>Video Presentation</h1>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/RnipHCd0mx4?si=0OnOjl3lcKWn0DXc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </section>
+
+</center>
+<!------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+<center>
+<h2> จัดทำโดย</h2>
+<table>
+    <tr>
+        <td><img src="me.png"  width="250" height="250"></td>
+        <td>
+            นาย ฤทธิเกียรติ คึมยะราช <br>
+            สาขาวิชาวิทยาการคอมพิวเตอร์ Computer Science - Data Science and Cybersecurity <br>
+            มหาวิทยาลัยกรุงเทพ <br><br><br><br>
+            (ชั้นปีที่ 3 เทอม 2 / 1640700140 )
+        </td>        
+    </tr>
+</table><br><br><br><br>
+</center>
+
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
